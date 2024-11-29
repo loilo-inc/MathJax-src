@@ -1,5 +1,8 @@
 {
-  "name": "mathjax-full",
+  "name": "@loilo-inc/mathjax-full",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  },
   "version": "3.2.2",
   "description": "Beautiful and accessible math in all browsers. MathJax is an open-source JavaScript display engine for LaTeX, MathML, and AsciiMath notation that works in all browsers and in server-side node applications. This package includes the source code as well as the packaged components.",
   "license": "Apache-2.0",
@@ -17,7 +20,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/mathjax/Mathjax-src/"
+    "url": "https://github.com/loilo-inc/Mathjax-src/"
   },
   "keywords": [
     "MathJax",
