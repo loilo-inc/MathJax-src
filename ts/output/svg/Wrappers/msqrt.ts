@@ -75,8 +75,8 @@ export class SVGmsqrt<N, T, D> extends CommonMsqrtMixin<SVGConstructor<any, any,
     base.toSVG(BASE);
     base.place(this.dx + sbox.w, 0);
     this.adaptor.append(SVG, this.svg('rect', {
-      width: this.fixed(bbox.w), height: this.fixed(t),
-      x: this.fixed(this.dx + sbox.w), y: this.fixed(H - t)
+      width: this.fixed(bbox.w + t * 0.5), height: this.fixed(t),
+      x: this.fixed(this.dx + sbox.w - t * 0.5), y: this.fixed(H - t)
     }));
   }
 

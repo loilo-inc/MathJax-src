@@ -452,7 +452,7 @@ export class FontData<C extends CharOptions, V extends VariantData<C>, D extends
     delim1:          2.39,
     delim2:          1.0,
     axis_height:      .25,
-    rule_thickness:   .06,
+    rule_thickness:   .040,
     big_op_spacing1:  .111,
     big_op_spacing2:  .167,
     big_op_spacing3:  .2,
