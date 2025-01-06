@@ -59,8 +59,12 @@ CommonMoMixin<SVGConstructor<any, any, any>>(SVGWrapper) {
    */
   private static nextClipPathId(): string {
     const n = this.clipPathIdCounter;
-    this.clipPathIdCounter++;
-    return `MJX-INLINE-CLIP-PATH-${n}`;
+    if (n >= Number.MAX_SAFE_INTEGER) {
+      this.clipPathIdCounter = 0;
+    } else {
+      this.clipPathIdCounter++;
+    }
+    return `MJX-LOILO-MO-CLIP-PATH-${n.toString(16)}`;
   }
 
   /**
