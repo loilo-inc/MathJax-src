@@ -51,18 +51,6 @@ CommonMoMixin<SVGConstructor<any, any, any>>(SVGWrapper) {
    */
   public static kind = MmlMo.prototype.kind;
 
-  private static clipPathIdCounter = 0;
-
-  /**
-   * generate id for <clipPath>
-   * @private
-   */
-  private static nextClipPathId(): string {
-    const n = this.clipPathIdCounter;
-    this.clipPathIdCounter++;
-    return `MJX-INLINE-CLIP-PATH-${n}`;
-  }
-
   /**
    * @override
    */
@@ -210,23 +198,15 @@ CommonMoMixin<SVGConstructor<any, any, any>>(SVGWrapper) {
     //    so this makes for sharper ends)
     const y = (s * (h - d) - Y) / 2;         // The bottom point to clip the extender
     if (Y <= 0) return;
-    const id = SVGmo.nextClipPathId();
-    const clipPath = this.svg('clipPath', {id: id});
-    const rect = this.svg('rect', {
-      x: this.fixed(0), y: this.fixed(0), width: this.fixed(w), height: this.fixed(Y)
+    const svg = this.svg('svg', {
+      width: this.fixed(w), height: this.fixed(Y),
+      y: this.fixed(B - D), x: this.fixed((W - w) / 2),
+      viewBox: [0, y, w, Y].map(x => this.fixed(x)).join(' ')
     });
-    adaptor.append(clipPath, rect);
-    adaptor.append(this.element, clipPath);
-    const g1 = this.svg('g', {
-      'clip-path': `url(#${id})`,
-      transform: `translate(${this.fixed((W - w) / 2)},${this.fixed(B - D)})`,
-    });
-    const g2 = this.svg('g', {transform: `translate(0,${this.fixed(y)})`});
-    adaptor.append(g1, g2);
-    this.addGlyph(n, v, 0, 0, g2);
-    const glyph = adaptor.lastChild(g2);
+    this.addGlyph(n, v, 0, 0, svg);
+    const glyph = adaptor.lastChild(svg);
     adaptor.setAttribute(glyph, 'transform', `scale(1,${this.jax.fixed(s)})`);
-    adaptor.append(this.element, g1);
+    adaptor.append(this.element, svg);
   }
 
   /**
